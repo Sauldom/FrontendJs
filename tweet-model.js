@@ -1,3 +1,14 @@
+
+function parseTweets(data){
+    return data.map(data =>({
+        handler:data.author,
+        date: new Date().toISOString(),
+        message: data.message,
+        likes: data.likes.length
+    }))
+}
+
+
 export function getTweets(){
     const tweets = [];
     const url = 'https://fake-tweets-api-kc.vercel.app/posts';
@@ -5,7 +16,9 @@ export function getTweets(){
     return new Promise ((resolve, reject) => {
         fetch(url)
             .then(response =>response.json())
-            .then(data=>{resolve(data)})   //las llaves son como un return         
+            .then(data=>{
+                const tweets = parseTweets(data);
+                resolve(tweets)})   //las llaves son como un return         
             .catch(()=>reject('Error obteniendo tweets'))
        
        })
