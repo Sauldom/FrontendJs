@@ -8,3 +8,7 @@ export function buildTweet(tweet){
             <p>${tweet.likes}</p>        
             `
 }
+
+export function BuildDrawTweetsButton(){
+    return `<button> Mostrar Tweets</button>`
+}
