@@ -1,10 +1,10 @@
-import { tweets } from "./tweet-model.js";
+import { getTweets } from "./tweet-model.js";
 import { buildTweet, BuildDrawTweetsButton } from "./tweet-view.js";
 //CONTROLADOR: es el mediador entre el modelo y la vista interactua con el dom
 
 export function tweetListController(tweetList) {
   //1 pintar el boton
-  
+
   //const button = BuildDrawTweetsButton();
   //no podemos hacer un appendChild porque es una cadena de texto
   //pero podemos hacerlo sin funcion
@@ -16,11 +16,18 @@ export function tweetListController(tweetList) {
   //2 asignar evento al boton
   showButton.addEventListener('click', () => {
     //3 mostrar los tweets
-    tweets.forEach(tweet => {
-      const divsTweet = document.createElement('div');
-      divsTweet.innerHTML = buildTweet(tweet);
-      tweetList.appendChild(divsTweet);
-    })
+    getTweets()
+      .then((tweets) => {
+        tweets.forEach(tweet => {
+          const divsTweet = document.createElement('div');
+          divsTweet.innerHTML = buildTweet(tweet);
+          tweetList.appendChild(divsTweet);
+        })
+      })
+      .catch((errorMessage)=>{
+        alert(errorMessage)
+      });
+
 
   })
 
