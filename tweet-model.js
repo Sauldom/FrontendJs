@@ -9,7 +9,7 @@ function parseTweets(data){
 }
 
 
-export function getTweets(){
+/*export function getTweets(){
     const tweets = [];
     const url = 'https://fake-tweets-api-kc.vercel.app/posts';
     
@@ -22,8 +22,22 @@ export function getTweets(){
             .catch(()=>reject('Error obteniendo tweets'))
        
        })
-    }
+    }*/
+export async function getTweets(){
+  
+  const url = 'https://fake-tweets-api-kc.vercel.app/posts';
+  let tweets=[];
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    tweets = parseTweets(data);
+    
+  } catch (error) {
+    throw new Error('Error obteniendo tweets');
+  }
+  return tweets;
 
+}
         
 
 /*const tweets = [{
