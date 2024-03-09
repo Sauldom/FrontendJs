@@ -12,3 +12,7 @@ export function buildTweet(tweet){
 export function BuildDrawTweetsButton(){
     return `<button> Mostrar Tweets</button>`
 }
+
+export function builtEmptyTweetList(){
+    return '<h3> Lo sentimos no hay tweets disponibles</h3>'
+}
