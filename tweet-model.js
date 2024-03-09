@@ -12,7 +12,7 @@ function parseTweets(data){
 
 export async function getTweets(){
   
-  const url = 'https://fake-tweets-api-kc.vercel.app/posts';
+  const url = 'http://localhost:8000/api/tweets';//'https://fake-tweets-api-kc.vercel.app/posts'
   let tweets=[];
   try {
     const response = await fetch(url);
