@@ -24,15 +24,20 @@ function renderTweets(tweets, tweetList){
 
 
 async function handleShowTweetsButtonClicked(tweetList){
-  try {
+  const spinner = tweetList.querySelector('.lds-ring');
+  try {      
+      spinner.classList.toggle('hidden');
       const tweets = await getTweets(tweetList);
       if(tweets.length ===0){
         renderEmptyTweetList(tweetList);
       }else{
         renderTweets(tweets, tweetList);
-      }     
+      }
+           
   } catch (errorMessage) {
     alert(errorMessage);
+  } finally{
+    spinner.classList.toggle('hidden');
   }
   
 }
