@@ -14,13 +14,7 @@ export function tweetListController(tweetList) {
 }
 
 
-function renderTweets(tweets, tweetList){
-    tweets.forEach(tweet => {
-    const divsTweet = document.createElement('div');
-    divsTweet.innerHTML = buildTweet(tweet);
-    tweetList.appendChild(divsTweet);
-})
-}
+
 
 
 async function handleShowTweetsButtonClicked(tweetList){
@@ -35,12 +29,31 @@ async function handleShowTweetsButtonClicked(tweetList){
       }
            
   } catch (errorMessage) {
-    alert(errorMessage);
+    dispatchErrorEvent(errorMessage,tweetList);
   } finally{
     spinner.classList.toggle('hidden');
   }
   
 }
+function dispatchErrorEvent(errorMessage,tweetList){
+  const event = new CustomEvent('error-loading-tweets',{
+    detail:{
+      message: errorMessage
+    }
+  });//creamos el evento
+  tweetList.dispatchEvent(event); //disparamos el evento
+
+}
+
+
+function renderTweets(tweets, tweetList){
+    tweets.forEach(tweet => {
+    const divsTweet = document.createElement('div');
+    divsTweet.innerHTML = buildTweet(tweet);
+    tweetList.appendChild(divsTweet);
+})
+}
+
 
 function renderEmptyTweetList(tweetList){
   tweetList.innerHTML =builtEmptyTweetList();
